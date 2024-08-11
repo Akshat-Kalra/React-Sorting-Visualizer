@@ -99,9 +99,12 @@ function SortingVisualizer() {
 
   return (
     <>
-        <button onClick={bubbleSort}>Bubble Sort</button>
-        <button onClick={insertionSort}>Insertion Sort</button>
-        <button onClick={generateRandomArray}>Generate Array</button>
+        <div className="button-container">
+            <button onClick={bubbleSort}>Bubble Sort</button>
+            <button onClick={insertionSort}>Insertion Sort</button>
+            <button onClick={generateRandomArray}>Generate Array</button>
+        </div>
+
         <div className="array-container">
         {array.map((value, idx) => (
             <ArrayBar key={idx} height={value} color = {idx === activeIndex ? 2 :
@@ -109,32 +112,36 @@ function SortingVisualizer() {
             }/>
         ))}
         </div>
-        <div>
-        <label htmlFor="arraySizeSlider">Array Size: </label>
-        <input
-            type="range"
-            id="arraySizeSlider"
-            name="arraySizeSlider"
-            min="10"
-            max="30"
-            value={sliderValue}
-            onChange={handleSliderChange}
-        />
-        <span>{sliderValue}</span>
-        
-            <label htmlFor="speedSelector">Select Speed: </label>
-            <select
-                id="speedSelector"
-                name="speedSelector"
-                value={speed}
-                onChange={handleSpeedChange}
-            >
-                <option value="Slow">Slow</option>
-                <option value="Medium">Medium</option>
-                <option value="Fast">Fast</option>
-            </select>
-            <span>Selected Speed: {speed}</span>
-    </div>
+
+        <div className="customize-container">
+            <div>
+                <label htmlFor="arraySizeSlider">Array Size: </label>
+                <input
+                    type="range"
+                    id="arraySizeSlider"
+                    name="arraySizeSlider"
+                    min="10"
+                    max="30"
+                    value={sliderValue}
+                    onChange={handleSliderChange}
+                />
+                <span>{sliderValue}</span>
+            </div>
+            <div>
+                <label htmlFor="speedSelector">Select Speed: </label>
+                <select
+                    id="speedSelector"
+                    name="speedSelector"
+                    value={speed}
+                    onChange={handleSpeedChange}
+                >
+                    <option value="Slow">Slow</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Fast">Fast</option>
+                </select>
+                <span>Selected Speed: {speed}</span>
+            </div>
+        </div>
     </>
   );
 }
