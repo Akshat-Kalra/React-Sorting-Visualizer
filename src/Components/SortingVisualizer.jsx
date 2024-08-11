@@ -8,13 +8,25 @@ function SortingVisualizer() {
   const [array, setArray] = useState([]);
   const [activeIndex, setActiveIndex] = useState();
   const [sortedIndices, setSortedIndices] = useState([]);
+  const [sliderValue, setSliderValue] = useState(10);
+  const [speed, setSpeed] = useState('Medium');
+
+
+  const handleSliderChange = (event) => {
+    setSliderValue(event.target.value);
+  };
+
+  const handleSpeedChange = (event) => {
+    setSpeed(event.target.value);
+  };
+
   useEffect(() => {
     generateRandomArray();
-  }, []);
+  }, [sliderValue]);
 
   const generateRandomArray = () => {
     const arr = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < sliderValue; i++) {
       arr.push(Math.floor(Math.random() * 500) + 5);
     }
     setArray(arr);
@@ -30,16 +42,17 @@ function SortingVisualizer() {
   const bubbleSort = async () => {
     const arr = [...array];
     const updatedIndices = [...sortedIndices];
+    const delay = speed === 'Slow' ? 800 : speed === 'Medium' ? 300 : 100;
 
     for (var i = 0; i < array.length; i++) {
         for (var j = 0; j < (array.length - i - 1); j++) {
             if(array[j] > array[j+1]) {
-                setActiveIndex(j);
+                setActiveIndex(j+1);
                 var temp = array[j]
                 array[j] = array[j + 1]
                 array[j + 1] = temp
                 setArray([... array])
-                await new Promise(resolve => setTimeout(resolve, 50));
+                await new Promise(resolve => setTimeout(resolve, delay));
             }
         }
 
@@ -62,16 +75,17 @@ function SortingVisualizer() {
 
         let current = array[i];
         let j = i - 1;
+        const delay = speed === 'Slow' ? 800 : speed === 'Medium' ? 300 : 100;
 
         setActiveIndex(i);
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise(resolve => setTimeout(resolve, delay));
 
         while (j >= 0 && array[j] > current) {
             setActiveIndex(j);
             array[j+1] = array[j];
             array[j] = current;
             setArray([... array]);
-            await new Promise(resolve => setTimeout(resolve, 100));
+            await new Promise(resolve => setTimeout(resolve, delay));
             j--;
         }
         // array[j + 1] = current;
@@ -79,12 +93,9 @@ function SortingVisualizer() {
 
         updatedIndices.push(i);
         setSortedIndices([...updatedIndices]);
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise(resolve => setTimeout(resolve, delay));
     }
   }
-
-
-  
 
   return (
     <>
@@ -98,6 +109,32 @@ function SortingVisualizer() {
             }/>
         ))}
         </div>
+        <div>
+        <label htmlFor="arraySizeSlider">Array Size: </label>
+        <input
+            type="range"
+            id="arraySizeSlider"
+            name="arraySizeSlider"
+            min="10"
+            max="30"
+            value={sliderValue}
+            onChange={handleSliderChange}
+        />
+        <span>{sliderValue}</span>
+        
+            <label htmlFor="speedSelector">Select Speed: </label>
+            <select
+                id="speedSelector"
+                name="speedSelector"
+                value={speed}
+                onChange={handleSpeedChange}
+            >
+                <option value="Slow">Slow</option>
+                <option value="Medium">Medium</option>
+                <option value="Fast">Fast</option>
+            </select>
+            <span>Selected Speed: {speed}</span>
+    </div>
     </>
   );
 }

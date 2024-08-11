@@ -14,7 +14,7 @@ function ArrayBar(props) {
         ? 'green' 
         : 'red',
       }}>
-        {props.height}
+        {/* {props.height} */}
     </div>
   )
 }
