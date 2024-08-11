@@ -14,10 +14,15 @@ function SortingVisualizer() {
 
   const generateRandomArray = () => {
     const arr = [];
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 10; i++) {
       arr.push(Math.floor(Math.random() * 500) + 5);
     }
     setArray(arr);
+    setActiveIndex([]);
+    setSortedIndices([]);
+  };
+
+  const resetState = () => {
     setActiveIndex([]);
     setSortedIndices([]);
   };
@@ -46,28 +51,35 @@ function SortingVisualizer() {
   }
 
   const insertionSort =  async () => {
+
+    // setting the first index to sorted
     const updatedIndices = [...sortedIndices];
+    updatedIndices.push(0);
+    setSortedIndices([...updatedIndices]);
 
     for (let i = 1; i < array.length; i++) {
+        // starting from index 1
+
         let current = array[i];
         let j = i - 1;
 
         setActiveIndex(i);
+        await new Promise(resolve => setTimeout(resolve, 100));
 
         while (j >= 0 && array[j] > current) {
             setActiveIndex(j);
             array[j+1] = array[j];
-            // array[j] = array[i];
+            array[j] = current;
             setArray([... array]);
-            await new Promise(resolve => setTimeout(resolve, 50));
+            await new Promise(resolve => setTimeout(resolve, 100));
             j--;
         }
-        array[j + 1] = current;
+        // array[j + 1] = current;
         setArray([... array]);
 
         updatedIndices.push(i);
         setSortedIndices([...updatedIndices]);
-        await new Promise(resolve => setTimeout(resolve, 50));
+        await new Promise(resolve => setTimeout(resolve, 100));
     }
   }
 

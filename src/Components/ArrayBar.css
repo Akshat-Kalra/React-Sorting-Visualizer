@@ -6,5 +6,5 @@
     border-color: black;
     margin: 0 2px;
     display: inline-block;
-    transition: height 0.2s ease;
+    transition: height 0.2s ease, background-color 0.1s ease;
   }
