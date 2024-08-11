@@ -1,0 +1,7 @@
+.array-bar {
+    width: 30px;
+    border-radius: 50px;
+    margin: 0 2px;
+    display: inline-block;
+    transition: height 0.2s ease;
+  }

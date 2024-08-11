@@ -1,0 +1,9 @@
+.array-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 600px;
+    width: 100%;
+    margin: auto;
+  }
+  
