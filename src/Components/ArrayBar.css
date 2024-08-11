@@ -1,6 +1,9 @@
 .array-bar {
     width: 30px;
     border-radius: 50px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
     margin: 0 2px;
     display: inline-block;
     transition: height 0.2s ease;

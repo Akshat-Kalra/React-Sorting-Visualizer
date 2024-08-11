@@ -9,11 +9,12 @@ function ArrayBar(props) {
     style={{
         height: `${props.height}px`,
         backgroundColor: props.color === 0 
-        ? '#61dafb' 
+        ? 'white' 
         : props.color === 1 
         ? 'green' 
         : 'red',
       }}>
+        {/* {props.height} */}
     </div>
   )
 }

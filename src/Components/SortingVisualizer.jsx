@@ -23,7 +23,6 @@ function SortingVisualizer() {
   };
 
   const bubbleSort = async () => {
-
     const arr = [...array];
     const updatedIndices = [...sortedIndices];
 
@@ -46,12 +45,39 @@ function SortingVisualizer() {
     setActiveIndex();
   }
 
+  const insertionSort =  async () => {
+    const updatedIndices = [...sortedIndices];
+
+    for (let i = 1; i < array.length; i++) {
+        let current = array[i];
+        let j = i - 1;
+
+        setActiveIndex(i);
+
+        while (j >= 0 && array[j] > current) {
+            setActiveIndex(j);
+            array[j+1] = array[j];
+            // array[j] = array[i];
+            setArray([... array]);
+            await new Promise(resolve => setTimeout(resolve, 50));
+            j--;
+        }
+        array[j + 1] = current;
+        setArray([... array]);
+
+        updatedIndices.push(i);
+        setSortedIndices([...updatedIndices]);
+        await new Promise(resolve => setTimeout(resolve, 50));
+    }
+  }
+
 
   
 
   return (
     <>
         <button onClick={bubbleSort}>Bubble Sort</button>
+        <button onClick={insertionSort}>Insertion Sort</button>
         <button onClick={generateRandomArray}>Generate Array</button>
         <div className="array-container">
         {array.map((value, idx) => (
