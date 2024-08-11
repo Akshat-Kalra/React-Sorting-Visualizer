@@ -12,6 +12,8 @@ function ArrayBar(props) {
         ? 'white' 
         : props.color === 1 
         ? 'green' 
+        : props.color === 3
+        ? 'blue'
         : 'red',
       }}>
         {/* {props.height} */}

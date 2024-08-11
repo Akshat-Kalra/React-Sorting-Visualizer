@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import "./SortingVisualizer.css";
 
 function SortingVisualizer() {
+  const [isSorting, setIsSorting] = useState(false);
   const [array, setArray] = useState([]);
   const [activeIndex, setActiveIndex] = useState();
   const [sortedIndices, setSortedIndices] = useState([]);
   const [sliderValue, setSliderValue] = useState(10);
   const [speed, setSpeed] = useState("Slow");
+  const [min, setMin] = useState();
 
   const handleSliderChange = (event) => {
     setSliderValue(event.target.value);
@@ -38,6 +40,7 @@ function SortingVisualizer() {
   };
 
   const bubbleSort = async () => {
+    setIsSorting(true);
     const arr = [...array];
     const updatedIndices = [...sortedIndices];
     const delay = speed === "Slow" ? 800 : speed === "Medium" ? 300 : 100;
@@ -64,9 +67,11 @@ function SortingVisualizer() {
         setSortedIndices([... arr2]);
         await new Promise((resolve) => setTimeout(resolve, 50));
     }
+    setIsSorting(false);
   };
 
   const insertionSort = async () => {
+    setIsSorting(true);
     // setting the first index to sorted
     const updatedIndices = [...sortedIndices];
     updatedIndices.push(0);
@@ -104,27 +109,34 @@ function SortingVisualizer() {
         setSortedIndices([... arr]);
         await new Promise((resolve) => setTimeout(resolve, 50));
     }
+    setIsSorting(false);
   };
 
   const selectionSort = async () => {
+    setIsSorting(true);
+    const updatedIndices = [...sortedIndices];
     const delay = speed === "Slow" ? 800 : speed === "Medium" ? 300 : 100;
     for (let i = 0; i < array.length; i++) {
         let minIndex = i;
-        setSortedIndices([minIndex, ...sortedIndices]);
+        // setSortedIndices([minIndex, ...sortedIndices]);
+        setMin(minIndex);
         await new Promise((resolve) => setTimeout(resolve, delay));
         for (let j = i + 1; j < array.length; j++) {
             setActiveIndex(j);
             await new Promise((resolve) => setTimeout(resolve, delay));
             if (array[j] < array[minIndex]) {
                 minIndex = j;
-                setSortedIndices([minIndex, ...sortedIndices]);
+                // setSortedIndices([minIndex, ...sortedIndices]);
+                setMin(minIndex);
                 await new Promise((resolve) => setTimeout(resolve, delay));
             }
         }
         var temp = array[i];
         array[i] = array[minIndex];
         array[minIndex] = temp;
-        setSortedIndices([i, ...sortedIndices]);
+
+        updatedIndices.push(i);
+        setSortedIndices([...updatedIndices]);
         setArray([... array]);
         await new Promise((resolve) => setTimeout(resolve, delay));
         
@@ -137,15 +149,16 @@ function SortingVisualizer() {
         setSortedIndices([... arr]);
         await new Promise((resolve) => setTimeout(resolve, 50));
     }
+    setIsSorting(false);
   };
 
   return (
     <>
       <div className="button-container">
-        <button onClick={bubbleSort}>Bubble Sort</button>
-        <button onClick={insertionSort}>Insertion Sort</button>
-        <button onClick={selectionSort}>Selection Sort</button>
-        <button onClick={generateRandomArray}>Generate Array</button>
+        <button onClick={bubbleSort} disabled={isSorting}>Bubble Sort</button>
+        <button onClick={insertionSort} disabled={isSorting}>Insertion Sort</button>
+        <button onClick={selectionSort} disabled={isSorting}>Selection Sort</button>
+        <button onClick={generateRandomArray} disabled={isSorting}>Generate Array</button>
       </div>
       <div className="array-container">
         {array.map((value, idx) => (
@@ -153,7 +166,7 @@ function SortingVisualizer() {
             key={idx}
             height={value}
             color={
-              idx === activeIndex ? 2 : sortedIndices.includes(idx) ? 1 : 0
+              idx === activeIndex ? 2 : sortedIndices.includes(idx) ? 1 : idx === min ? 3 : 0
             }
           />
         ))}
