@@ -37,6 +37,7 @@ function SortingVisualizer() {
     setArray(arr);
     setActiveIndex([]);
     setSortedIndices([]);
+    setMin();
   };
 
   const bubbleSort = async () => {
