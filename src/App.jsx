@@ -1,4 +1,4 @@
-import SortingVisualizer from './Components/SortingVisualizer.JSX'
+import SortingVisualizer from './Components/SortingVisualizer.jsx'
 import React from 'react'
 import './App.css'
 
