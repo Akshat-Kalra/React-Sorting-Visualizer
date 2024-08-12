@@ -142,7 +142,7 @@ function SortingVisualizer() {
     setIsSorting(false);
   };
 
-  
+
   return (
     <>
       <div className="button-container">
