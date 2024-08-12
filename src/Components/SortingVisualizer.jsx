@@ -11,6 +11,11 @@ function SortingVisualizer() {
   const [sliderValue, setSliderValue] = useState(10);
   const [speed, setSpeed] = useState("Slow");
   const [min, setMin] = useState();
+  const [selectedSort, setSelectedSort] = useState("Bubble");
+
+  const handleSortChange = (event) => {
+    setSelectedSort(event.target.value);
+  };
 
   const handleSliderChange = (event) => {
     setSliderValue(event.target.value);
@@ -146,18 +151,31 @@ function SortingVisualizer() {
   return (
     <>
       <div className="button-container">
-        <button onClick={bubbleSort} disabled={isSorting}>
+        <button className={`${selectedSort !== "Bubble" ? "hidden" : ""}`} onClick={bubbleSort} disabled={isSorting}>
           Bubble Sort
         </button>
-        <button onClick={insertionSort} disabled={isSorting}>
+        <button className={`${selectedSort !== "Insertion" ? "hidden" : ""}`} onClick={insertionSort} disabled={isSorting}>
           Insertion Sort
         </button>
-        <button onClick={selectionSort} disabled={isSorting}>
+        <button className={`${selectedSort !== "Selection" ? "hidden" : ""}`} onClick={selectionSort} disabled={isSorting}>
           Selection Sort
         </button>
         <button onClick={generateRandomArray} disabled={isSorting}>
           Generate Array
         </button>
+        <div className="sort-dropdown-container">
+          <label htmlFor="sortSelector">Select Sort: </label>
+          <select
+            id="sortSelector"
+            name="sortSelector"
+            value={selectedSort}
+            onChange={handleSortChange}
+          >
+            <option value="Bubble">Bubble Sort</option>
+            <option value="Insertion">Insertion Sort</option>
+            <option value="Selection">Selection Sort</option>
+          </select>
+        </div>
       </div>
       <div className="array-container">
         {array.map((value, idx) => (
