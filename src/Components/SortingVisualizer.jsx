@@ -91,16 +91,16 @@ function SortingVisualizer() {
       while (j >= 0 && array[j] > current) {
         setActiveIndex(j);
         array[j + 1] = array[j];
+        updatedIndices.push(i);
+        setSortedIndices([...updatedIndices]);
         array[j] = current;
         setArray([...array]);
         await new Promise((resolve) => setTimeout(resolve, delay));
         j--;
       }
+        updatedIndices.push(i);
+        setSortedIndices([...updatedIndices]);
       setArray([...array]);
-
-      updatedIndices.push(i);
-      setSortedIndices([...updatedIndices]);
-      await new Promise((resolve) => setTimeout(resolve, delay));
     }
     setActiveIndex();
     let arr = [];
