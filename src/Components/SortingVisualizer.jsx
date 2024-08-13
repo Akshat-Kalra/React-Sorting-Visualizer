@@ -152,15 +152,6 @@ function SortingVisualizer() {
   return (
     <>
       <div className="button-container">
-        <button className={`${selectedSort !== "Bubble" ? "hidden" : ""}`} onClick={bubbleSort} disabled={isSorting}>
-        Sort
-        </button>
-        <button className={`${selectedSort !== "Insertion" ? "hidden" : ""}`} onClick={insertionSort} disabled={isSorting}>
-        Sort
-        </button>
-        <button className={`${selectedSort !== "Selection" ? "hidden" : ""}`} onClick={selectionSort} disabled={isSorting}>
-        Sort
-        </button>
         <button onClick={generateRandomArray} disabled={isSorting}>
           Generate Array
         </button>
@@ -190,6 +181,15 @@ function SortingVisualizer() {
             <option value="Fast">Fast</option>
           </select>
         </div>
+        <button className={`${selectedSort !== "Bubble" ? "hidden" : ""}`} onClick={bubbleSort} disabled={isSorting}>
+        Sort
+        </button>
+        <button className={`${selectedSort !== "Insertion" ? "hidden" : ""}`} onClick={insertionSort} disabled={isSorting}>
+        Sort
+        </button>
+        <button className={`${selectedSort !== "Selection" ? "hidden" : ""}`} onClick={selectionSort} disabled={isSorting}>
+        Sort
+        </button>
       </div>
       <div className="array-container">
         {array.map((value, idx) => (
