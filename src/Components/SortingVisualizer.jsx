@@ -162,6 +162,7 @@ function SortingVisualizer() {
             name="sortSelector"
             value={selectedSort}
             onChange={handleSortChange}
+            disabled={isSorting}
           >
             <option value="Bubble">Bubble Sort</option>
             <option value="Insertion">Insertion Sort</option>
@@ -175,6 +176,7 @@ function SortingVisualizer() {
             name="speedSelector"
             value={speed}
             onChange={handleSpeedChange}
+            disabled={isSorting}
           >
             <option value="Slow">Slow</option>
             <option value="Medium">Medium</option>
@@ -220,6 +222,7 @@ function SortingVisualizer() {
             max="30"
             value={sliderValue}
             onChange={handleSliderChange}
+            disabled={isSorting}
           />
           <span>{sliderValue}</span>
         </div>
