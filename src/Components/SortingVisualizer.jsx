@@ -153,13 +153,13 @@ function SortingVisualizer() {
     <>
       <div className="button-container">
         <button className={`${selectedSort !== "Bubble" ? "hidden" : ""}`} onClick={bubbleSort} disabled={isSorting}>
-          Bubble Sort
+        Sort
         </button>
         <button className={`${selectedSort !== "Insertion" ? "hidden" : ""}`} onClick={insertionSort} disabled={isSorting}>
-          Insertion Sort
+        Sort
         </button>
         <button className={`${selectedSort !== "Selection" ? "hidden" : ""}`} onClick={selectionSort} disabled={isSorting}>
-          Selection Sort
+        Sort
         </button>
         <button onClick={generateRandomArray} disabled={isSorting}>
           Generate Array
@@ -175,6 +175,19 @@ function SortingVisualizer() {
             <option value="Bubble">Bubble Sort</option>
             <option value="Insertion">Insertion Sort</option>
             <option value="Selection">Selection Sort</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="speedSelector">Speed: </label>
+          <select
+            id="speedSelector"
+            name="speedSelector"
+            value={speed}
+            onChange={handleSpeedChange}
+          >
+            <option value="Slow">Slow</option>
+            <option value="Medium">Medium</option>
+            <option value="Fast">Fast</option>
           </select>
         </div>
       </div>
@@ -210,20 +223,7 @@ function SortingVisualizer() {
           />
           <span>{sliderValue}</span>
         </div>
-        <div>
-          <label htmlFor="speedSelector">Select Speed: </label>
-          <select
-            id="speedSelector"
-            name="speedSelector"
-            value={speed}
-            onChange={handleSpeedChange}
-          >
-            <option value="Slow">Slow</option>
-            <option value="Medium">Medium</option>
-            <option value="Fast">Fast</option>
-          </select>
-          <span>Selected Speed: {speed}</span>
-        </div>
+        
       </div>
     </>
   );
